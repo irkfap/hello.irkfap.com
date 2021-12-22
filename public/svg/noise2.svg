@@ -14,7 +14,6 @@
     ]]></style>
 
     <filter id="whitenoise" x="0%" y="0%" width="100%" height="100%">
-      <!--suppress XmlDefaultAttributeValue -->
       <feTurbulence baseFrequency="0.5" result="noise" />
     </filter>
 
