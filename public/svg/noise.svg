@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <link xmlns="http://www.w3.org/1999/xhtml" rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Bellota+Text:wght@400;700&amp;family=Outfit:wght@280;300&amp;family=Raleway:wght@300;400&amp;display=swap"/>
+
+    <style type="text/css"><![CDATA[
+      .caption {
+        font-family: 'Bellota Text', sans-serif;
+        font-weight: 700;
+        font-size: 50vw;
+      }
+    ]]></style>
+
+    <filter id="noise" x="0%" y="0%" width="100%" height="100%">
+      <!--suppress XmlDefaultAttributeValue -->
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" result="noise" />
+    </filter>
+
+    <!-- https://medium.com/@codebro/svg-noise-filter-bc6247ba4399 -->
+    <filter id="aninoise">
+      <feTurbulence baseFrequency="0.05"/>
+      <feColorMatrix type="hueRotate" values="0">
+        <animate
+          attributeName="values"
+          from="0"
+          to="360"
+          dur="2s"
+          repeatCount="indefinite"
+        />
+      </feColorMatrix>
+      <feColorMatrix
+        type="matrix"
+        values="0 0 0 0 0
+               0 0 0 0 0
+               0 0 0 0 0
+               1 0 0 0 0"
+      />
+      <feDisplacementMap in="SourceGraphic" scale="10"/>
+    </filter>
+  </defs>
+
+
+  <rect x="0" y="0" width="100%" height="100%" filter="url(#noise)" fill="none"/>
+  <text dominant-baseline="middle" alignment-baseline="middle" class="caption" x="5%" y="50%" filter="url(#aninoise)">404</text>
+</svg>
