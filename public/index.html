@@ -292,7 +292,10 @@ _      __     ___     _    _        ______  _____     ___
         // in Chrome-based browsers in Mac OS (Windows is fine).
         // When filter product is rgb(0, 255, 255), it is rendered as rgb(0, 207, 223).
         // I guess it is impossible to do a feature-detection in that case :-(
-        if (typeof window.chrome !== 'undefined' && navigator.appVersion.indexOf('Mac OS') !== -1) {
+        // noinspection JSDeprecatedSymbols
+        if (typeof window.chrome !== 'undefined'
+              && typeof navigator.appVersion === "string"
+              && navigator.appVersion.indexOf('Mac OS') !== -1) {
           result = false;
         }
       } catch(e) {}
