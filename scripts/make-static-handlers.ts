@@ -58,7 +58,7 @@ const ROUTE_FLAGS: RouteFlagsType = {
   '*.woff2': 'font/woff2',
 };
 
-const IGNORE_FILES = ['**/.DS_Store', '**/LICENSE.txt', '**/config.json'];
+const IGNORE_FILES = ['**/.DS_Store', '**/LICENSE.txt', '**/config.json', '**/*.php'];
 
 const GLOB_OPTIONS: Options = {
   braceExpansion: false,
