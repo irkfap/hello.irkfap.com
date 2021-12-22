@@ -120,11 +120,82 @@ _      __     ___     _    _        ______  _____     ___
     svg {
       font-family: 'Bellota Text', sans-serif;
     }
+
+    .caption {
+      font-family: "Bellota Text", sans-serif;
+      font-weight: 700;
+      font-size: 50vw;
+    }
   </style>
 
 </head>
 <body>
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- https://tympanus.net/codrops/2019/02/19/svg-filter-effects-creating-texture-with-feturbulence/ -->
+      <!-- https://www.sarasoueidan.com/blog/svg-filters/ -->
+      <filter id="paper" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise"/>
 
+        <feDiffuseLighting in="noise" lighting-color="white" surfaceScale="3" result="texture">
+          <feDistantLight azimuth="45" elevation="60" />
+        </feDiffuseLighting>
+
+        <feComponentTransfer in="texture" result="texture-contrast">
+          <feFuncR type="gamma" amplitude="1.1" exponent="1.1"/>
+          <feFuncG type="gamma" amplitude="1.1" exponent="1.1"/>
+          <feFuncB type="gamma" amplitude="1.1" exponent="1.1"/>
+        </feComponentTransfer>
+      </filter>
+
+      <filter id="watercolor" x="0%" y="0%" width="100%" height="100%">
+        <!-- paper texture { -->
+        <!-- FIXME: use <feImage>? -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise"/>
+
+        <feDiffuseLighting in="noise" lighting-color="white" surfaceScale="3" result="texture">
+          <feDistantLight azimuth="45" elevation="60" />
+        </feDiffuseLighting>
+
+        <!-- FIXME: Firefox compatibility -->
+        <feComponentTransfer in="texture" result="texture-contrast">
+          <feFuncR type="gamma" amplitude="1.1" exponent="1.1"/>
+          <feFuncG type="gamma" amplitude="1.1" exponent="1.1"/>
+          <feFuncB type="gamma" amplitude="1.1" exponent="1.1"/>
+        </feComponentTransfer>
+        <!-- } paper texture -->
+
+        <feMorphology operator="dilate" radius="15" in="SourceGraphic" result="text-expand"/>
+
+        <feTurbulence type="turbulence" baseFrequency="0.05"
+                      numOctaves="2" result="turbulence"/>
+        <feDisplacementMap in2="turbulence" in="text-expand" result="text-fringe"
+                           scale="20" xChannelSelector="A" yChannelSelector="R"/>
+        <feGaussianBlur in="text-fringe" stdDeviation="2" result="text-fringe-smooth"/>
+
+        <feGaussianBlur in="texture-contrast" stdDeviation="0.5" result="texture-map"/>
+        <feDisplacementMap in="text-fringe-smooth" in2="texture-map" result="mapped-text"
+                           scale="30" xChannelSelector="R" yChannelSelector="R"/>
+
+        <feColorMatrix in="mapped-text" result="text-opacity"
+                       type="matrix" values="1 0 0   0 0
+                                0 1 0   0 0
+                                0 0 1   0 0
+                                0 0 0 0.9 0"/>
+
+        <feBlend in="texture-contrast" in2="text-opacity" mode="multiply" result="blend"/>
+      </filter>
+    </defs>
+
+    <g>
+      <rect x="0" y="0" width="100%" height="100%" fill="none" filter="url(#paper)"/>
+      <text fill="red" filter="url(#watercolor)"
+            dominant-baseline="middle"
+            alignment-baseline="middle"
+            text-anchor="middle"
+            class="caption" x="50%" y="50%">404</text>
+    </g>
+  </svg>
 
 </body>
 <!--
