@@ -49,75 +49,17 @@ _      __     ___     _    _        ______  _____     ___
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bellota+Text:wght@400;700&family=Outfit:wght@280;300&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bellota+Text:wght@300;700&display=swap" rel="stylesheet">
 
   <style>
     html, body {
       width: 100%;
       height: 100%;
-      font-family: 'Raleway', sans-serif;
+    }
+    body {
+      margin: 0;
     }
     h1,h2,h3,h4,h5,h6 {
-      font-family: 'Bellota Text', sans-serif;
-    }
-
-    @font-face {
-      font-family: 'fontello';
-      src: url('./fontello/font/fontello.eot');
-      src: url('./fontello/font/fontello.eot#iefix') format('embedded-opentype'),
-        url('./fontello/font/fontello.woff2') format('woff2'),
-        url('./fontello/font/fontello.woff') format('woff'),
-        url('./fontello/font/fontello.ttf') format('truetype'),
-        url('./fontello/font/fontello.svg#fontello') format('svg');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    .font-icon {
-      font-family: fontello, fantasy;
-      font-style: normal;
-      font-weight: normal;
-      speak: never;
-
-      display: inline-block;
-      text-decoration: none;
-      width: 1em;
-      margin-right: .1em;
-      text-align: center;
-
-      /* For safety - reset parent styles, that can break glyph codes*/
-      font-variant: normal;
-      text-transform: none;
-
-      /* fix buttons height, for twitter bootstrap */
-      line-height: 1em;
-
-      /* Animation center compensation - margins should be symmetric */
-      /* remove if not needed */
-      margin-left: .1em;
-
-      /* You can be more comfortable with increased icons size */
-      /* font-size: 120%; */
-
-      /* Font smoothing. That was taken from TWBS */
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-
-      /* Uncomment for 3D effect */
-      /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);*/
-    }
-
-    @media print {
-      /* stylelint-disable-next-line selector-no-qualifying-type */
-      a[href^='http']::after {
-        color: #666;
-        content: ' (' attr(href) ') ';
-        font-size: 70%;
-        vertical-align: 0;
-      }
-    }
-
-    svg {
       font-family: 'Bellota Text', sans-serif;
     }
 
@@ -125,6 +67,11 @@ _      __     ___     _    _        ______  _____     ___
       font-family: "Bellota Text", sans-serif;
       font-weight: 700;
       font-size: 50vw;
+    }
+    @media only screen and (max-width: 667px) {
+      .caption {
+        font-weight: 300;
+      }
     }
   </style>
 
@@ -134,20 +81,6 @@ _      __     ___     _    _        ______  _____     ___
     <defs>
       <!-- https://tympanus.net/codrops/2019/02/19/svg-filter-effects-creating-texture-with-feturbulence/ -->
       <!-- https://www.sarasoueidan.com/blog/svg-filters/ -->
-      <filter id="paper" x="0%" y="0%" width="100%" height="100%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise"/>
-
-        <feDiffuseLighting in="noise" lighting-color="white" surfaceScale="3" result="texture">
-          <feDistantLight azimuth="45" elevation="60" />
-        </feDiffuseLighting>
-
-        <feComponentTransfer in="texture" result="texture-contrast">
-          <feFuncR type="gamma" amplitude="1.1" exponent="1.1"/>
-          <feFuncG type="gamma" amplitude="1.1" exponent="1.1"/>
-          <feFuncB type="gamma" amplitude="1.1" exponent="1.1"/>
-        </feComponentTransfer>
-      </filter>
-
       <filter id="watercolor" x="0%" y="0%" width="100%" height="100%">
         <!-- paper texture { -->
         <!-- FIXME: use <feImage>? -->
@@ -165,12 +98,12 @@ _      __     ___     _    _        ______  _____     ___
         </feComponentTransfer>
         <!-- } paper texture -->
 
-        <feMorphology operator="dilate" radius="15" in="SourceGraphic" result="text-expand"/>
+        <feMorphology operator="dilate" radius="10" in="SourceGraphic" result="text-expand"/>
 
         <feTurbulence type="turbulence" baseFrequency="0.05"
                       numOctaves="2" result="turbulence"/>
         <feDisplacementMap in2="turbulence" in="text-expand" result="text-fringe"
-                           scale="20" xChannelSelector="A" yChannelSelector="R"/>
+                           scale="10" xChannelSelector="A" yChannelSelector="R"/>
         <feGaussianBlur in="text-fringe" stdDeviation="2" result="text-fringe-smooth"/>
 
         <feGaussianBlur in="texture-contrast" stdDeviation="0.5" result="texture-map"/>
@@ -187,9 +120,9 @@ _      __     ___     _    _        ______  _____     ___
       </filter>
     </defs>
 
-    <g>
-      <rect x="0" y="0" width="100%" height="100%" fill="none" filter="url(#paper)"/>
-      <text fill="red" filter="url(#watercolor)"
+    <g filter="url(#watercolor)">
+      <rect x="0" y="0" width="100%" height="100%" fill="none" />
+      <text fill="red"
             dominant-baseline="middle"
             alignment-baseline="middle"
             text-anchor="middle"
