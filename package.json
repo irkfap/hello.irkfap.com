@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/siberex/hello.irkfap.com#readme",
   "devDependencies": {
-    "@types/js-yaml": "4.0.5",
+    "@types/js-yaml": "4.0.9",
     "@types/node": "17.0.0",
     "fast-glob": "3.2.11",
     "js-yaml": "4.1.0",
